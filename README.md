@@ -15,8 +15,12 @@ Thus, using one of the core functionnalities of vendor security solutions used b
 ## Input Example :
 #### Windows Software 
 On a Windows System, open powershell
-Open powershell and type Get-WmiObject -Class Win32_Product
+Open powershell and type 
+```powershell
+Get-WmiObject -Class Win32_Product
+```
 
+```powershell
 IdentifyingNumber : {6AD2231F-FF48-4D59-AC26-405AFAE23DB7}
 Name              : ManageEngine Desktop Central - Agent
 Vendor            : ZohoCorp
@@ -28,11 +32,13 @@ Name              : Oracle VM VirtualBox 6.1.14
 Vendor            : Oracle Corporation
 Version           : 6.1.14
 Caption           : Oracle VM VirtualBox 6.1.14
-
+```
 ### Linux packages 
 On a red hat system, open CLI and type :
+```bash
 rpm -qa 
-
+```
+```bash
 irqbalance-1.0.7-12.el7.x86_64
 python-six-1.9.0-2.el7.noarch
 libldb-1.5.4-1.el7.x86_64
@@ -45,7 +51,7 @@ glibc-common-2.17-317.el7.x86_64
 gpg-pubkey-04bbaa7b-4c881cbf
 openssl-libs-1.0.2k-21.el7_9.x86_64
 ....
-
+```
 
 ## Example of querying the Red Hat Vulnerability Database
 Base URL : https://access.redhat.com/hydra/rest/securitydata/cve
