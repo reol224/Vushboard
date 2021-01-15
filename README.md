@@ -3,12 +3,11 @@
 
 vulnerabilityDashboard (VD) is an open source security auditig utility. 
 
-It works by centrally collecting softwares and packages installed on infrastructure endpoints (Windows 10, all editions of Windows Server and
-Red Hat linux are supported for now)
+It works by collecting inventory of softwares and packages installed on remote infrastructure endpoints (Windows 10, all editions of Windows Server and
+Red Hat linux are supported for now) and use publicly available vulnerability feeds to do a vulnerability asssessment of the installed packages. It provides users with the ability to do a Risk Assessment of their infrastructure
+
 Thus, using one of the core functionnalities of vendor security solutions used by security engineers, and penetration testers (and non-ethical hackers...)
 
-It provides system administrators and security analysts with the ability to have 
-continous visibility over the vulnerability status of the assets they manage.
 
 ## Basic System Diagram
 <img src ="vulnerabilityDashboard.jpg">
