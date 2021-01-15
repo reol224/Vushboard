@@ -11,7 +11,7 @@ It provides system administrators and security analysts with the ability to have
 continous visibility over the vulnerability status of the assets they manage.
 
 ## Basic System Diagram
-
+<img src ="vulnerabilityDashboard.jpg">
 
 ## Input Example :
 #### Windows Software 
@@ -50,8 +50,13 @@ openssl-libs-1.0.2k-21.el7_9.x86_64
 
 ## Example of querying the Red Hat Vulnerability Database
 Base URL : https://access.redhat.com/hydra/rest/securitydata/cve
-DOcumentation : https://access.redhat.com/documentation/en-us/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index
+
+Documentation : https://access.redhat.com/documentation/en-us/red_hat_security_data_api/1.0/html-single/red_hat_security_data_api/index
+
 Browsing all vulnerabilities (CVEs) affecting mariadb package (regardless of version).
 This needs to be further processed to collect CVEs only affecting the current installed number and not all history, via leveraging either :
 - Leverage parameters in the GET request
 - Locally store in VD Database all vulnerabilities affecting packages known to be installed. Then, locally process to extract only the CVEs associated with the installed version number
+
+
+<img src ="example-get-redh-hat-vulnerabilities-by-pkg.JPG">
