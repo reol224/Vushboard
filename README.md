@@ -4,7 +4,7 @@
 vulnerabilityDashboard (VD) is an open source security auditig utility. 
 
 It works by collecting inventory of softwares and packages installed on remote infrastructure endpoints (Windows 10, all editions of Windows Server and
-Red Hat linux are supported for now) and use publicly available vulnerability feeds to do a vulnerability asssessment of the installed packages. It provides users with the ability to do a Risk Assessment of their infrastructure
+Red Hat linux are supported for now) and use publicly available vulnerability feeds to do a vulnerability asssessment of the installed packages.   It provides users with the ability to do a Risk Assessment of their infrastructure
 
 Thus, using one of the core functionnalities of vendor security solutions used by security engineers, and penetration testers (and non-ethical hackers...)
 
@@ -14,19 +14,19 @@ Thus, using one of the core functionnalities of vendor security solutions used b
 
 ## Input Example :
 ### How to read a Linux package
-example : subscription-manager-1.24.42-1.el7.x86_64
-(separate at the "-")
-Package Name : subscription-manager
-Package Version : 1.24.42
-Package Release : 1.el7
-Package Architecture : x86_64
-(Package Type : implied. Always RPM for a Fedora / CentOS or Red Hat system)
+example : subscription-manager-1.24.42-1.el7.x86_64  
+(separate at the "-")  
+Package Name : subscription-manager  
+Package Version : 1.24.42  
+Package Release : 1.el7  
+Package Architecture : x86_64  
+(Package Type : implied. Always RPM for a Fedora / CentOS or Red Hat system)  
 
 
 
 #### Windows Software 
-On a Windows System, open powershell
-Open powershell and type 
+On a Windows System, open powershell  
+Open powershell and type   
 ```powershell
 Get-WmiObject -Class Win32_Product
 ```
