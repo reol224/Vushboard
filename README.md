@@ -10,7 +10,7 @@ Thus, using one of the core functionnalities of vendor security solutions used b
 
 
 ## Basic System Diagram
-<img src ="vulnerabilityDashboard.jpg">
+<img src ="img/vulnerabilityDashboard.jpg">
 
 ## Input Example :
 ### How to read a Linux package
@@ -75,4 +75,4 @@ This needs to be further processed to collect CVEs only affecting the current in
 - Locally store in VD Database all vulnerabilities affecting packages known to be installed. Then, locally process to extract only the CVEs associated with the installed version number
 
 
-<img src ="example-get-redh-hat-vulnerabilities-by-pkg.JPG">
+<img src ="img/example-get-redh-hat-vulnerabilities-by-pkg.jpg">
