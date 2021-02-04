@@ -1,7 +1,6 @@
 package com.example.vulndashboard;
 
 import com.example.vulndashboard.entities.Package;
-import com.example.vulndashboard.entities.WindowsVm;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
