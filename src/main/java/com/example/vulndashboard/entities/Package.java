@@ -1,25 +1,35 @@
 package com.example.vulndashboard.entities;
 
-import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Set;
 
-@MappedSuperclass
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@Document(collection = "Package")
 public class Package {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="package_id")
+    private ObjectId _id;
     private long pkId;
     private String name;
     private String version;
     private String arch;
 
-    @ManyToMany(fetch=FetchType.LAZY,
-            cascade ={CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(name="vms_packages",
-            joinColumns = @JoinColumn(name="package_id"),
-            inverseJoinColumns=@JoinColumn(name="vm_id") )
     private Set<VirtualMachine> vms;
+
+    public Package() {
+
+    }
 
     public long getPkId() {
         return pkId;

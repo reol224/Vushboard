@@ -1,32 +1,33 @@
 package com.example.vulndashboard.entities;
 
-import javax.persistence.*;
-import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@MappedSuperclass
+import java.util.Set;
+@Getter
+@Setter
+@ToString
+
+@Document(collection = "Virtual Machine")
 public abstract class VirtualMachine {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="vm_id")
+    private ObjectId _id;
     private long vmId;
     private String hostname;
     private String ipAddr;
     private String os;
-    private String site;
-    @ManyToMany(fetch=FetchType.LAZY,
-            cascade ={CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(name="vms_packages",
-            joinColumns = @JoinColumn(name="vm_id"),
-            inverseJoinColumns=@JoinColumn(name="package_id") )
     private Set<Package> packages;
 
-    public VirtualMachine(long vmId, String hostname, String ipAddr, String os, String site) {
+    public VirtualMachine(long vmId, String hostname, String ipAddr, String os) {
         this.vmId = vmId;
         this.hostname = hostname;
         this.ipAddr = ipAddr;
         this.os = os;
-        this.site = site;
     }
 
     public long getVmId() {
@@ -59,14 +60,6 @@ public abstract class VirtualMachine {
 
     public void setOs(String os) {
         this.os = os;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
     }
 
     public Set<Package> getPackages() {
