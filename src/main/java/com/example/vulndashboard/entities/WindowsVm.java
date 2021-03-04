@@ -12,7 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Virtual Machine")
 public class WindowsVm extends VirtualMachine{
 
-    public WindowsVm(long vmId, String hostname, String ipAddr, String os) {
-        super(vmId, hostname, ipAddr, os);
+    public WindowsVm(String hostName,
+                     String OSName,
+                     String OSVersion,
+                     String SystemManufacturer,
+                     String ipAddress) {
+        super(hostName, OSName, OSVersion,SystemManufacturer,ipAddress);
     }
 }

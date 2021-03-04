@@ -1,8 +1,9 @@
 package com.example.vulndashboard.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,55 +12,42 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "host_name",
+        "os_name",
+        "os_version",
+        "os_manufacturer",
+        "os_config",
+        "system_manufacturer",
+        "system_type",
+        "ip_address"
+})
 @Document(collection = "Virtual Machine")
 public abstract class VirtualMachine {
 
     @Id
     private ObjectId _id;
-    private long vmId;
-    private String hostname;
-    private String ipAddr;
-    private String os;
+    @JsonProperty("host_name")
+    private String hostName;
+    @JsonProperty("os_name")
+    private String OSName;
+    @JsonProperty("os_version")
+    private String OSVersion;
+    @JsonProperty("processor_type")
+    private String processorType;
+    @JsonProperty("ip_address")
+    private String  ipAddress;
     private Set<Package> packages;
 
-    public VirtualMachine(long vmId, String hostname, String ipAddr, String os) {
-        this.vmId = vmId;
-        this.hostname = hostname;
-        this.ipAddr = ipAddr;
-        this.os = os;
-    }
-
-    public long getVmId() {
-        return vmId;
-    }
-
-    public void setVmId(long vmId) {
-        this.vmId = vmId;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
-    }
-
-    public String getIpAddr() {
-        return ipAddr;
-    }
-
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr;
-    }
-
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
+    public VirtualMachine(String hostName, String OSName, String OSVersion, String processorType, String ipAddress) {
+        this.hostName = hostName;
+        this.OSName = OSName;
+        this.OSVersion = OSVersion;
+        this.processorType = processorType;
+        this.ipAddress = ipAddress;
     }
 
     public Set<Package> getPackages() {

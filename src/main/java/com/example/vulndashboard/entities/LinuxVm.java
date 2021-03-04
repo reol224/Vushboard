@@ -10,9 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 
 @Document(collection = "Virtual Machine")
-public class LinuxVm extends VirtualMachine{
+public class LinuxVm extends VirtualMachine {
 
-    public LinuxVm(long vmId, String hostname, String ipAddr, String os) {
-        super(vmId, hostname, ipAddr, os);
+    public LinuxVm(String hostName,
+                   String OSName,
+                   String OSVersion,
+                   String SystemManufacturer,
+                   String ipAddress) {
+        super(hostName, OSName, OSVersion,SystemManufacturer,ipAddress);
     }
 }

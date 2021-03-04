@@ -6,9 +6,12 @@ import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cvrf")
@@ -49,12 +52,58 @@ public class CVRFController{
         return response.toPrettyString();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/all/add")
     public String addCVRF(@RequestBody CVRF cvrf){
         mongoTemplate.insert(cvrf, "Vulnerabilities");
         return "Added CVRF " + cvrf.getRHSA() + " " + cvrf.getSeverity() + " "
                 +cvrf.getReleasedOn() + " " + cvrf.getResourceUrl() + " " + cvrf.getBugzillas()
                 + " " + cvrf.getCVEs() + " " + cvrf.getReleasedPackages();
+    }
+
+    @GetMapping("/all/{severity}")
+    public Object getCVRFBySeverity(@PathVariable String severity){
+        return repository.findBySeverity(severity);
+    }
+
+    @PutMapping("/all/{severity}")
+    public ResponseEntity<CVRF> updateCVRF(@PathVariable String severity, @RequestBody CVRF cvrf){
+        Optional<CVRF> optional = repository.findBySeverity(severity);
+
+        if(optional.isPresent()){
+            CVRF newData = optional.get();
+            newData.setRHSA(cvrf.getRHSA());
+            newData.setSeverity(cvrf.getSeverity());
+            newData.setReleasedOn(cvrf.getReleasedOn());
+            newData.setCVEs(cvrf.getCVEs());
+            newData.setBugzillas(cvrf.getBugzillas());
+            newData.setReleasedPackages(cvrf.getReleasedPackages());
+            newData.setResourceUrl(cvrf.getResourceUrl());
+
+            return new ResponseEntity<>(repository.save(newData), HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/all/{severity}")
+    public ResponseEntity<HttpStatus> deleteBySeverity(@PathVariable("severity") String severity) {
+        try {
+            repository.deleteBySeverity(severity);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+        try {
+            repository.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/all")
