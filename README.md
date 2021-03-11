@@ -6,7 +6,7 @@
 # Vushboard
 
 
-Vushboard (VD) is an open source security auditig utility. 
+Vushboard (VD) is an open source security auditing utility. 
 
 It works by collecting inventory of softwares and packages installed on remote infrastructure endpoints (Windows 10, all editions of Windows Server and
 Red Hat linux are supported for now) and use publicly available vulnerability feeds to do a vulnerability asssessment of the installed packages.  
