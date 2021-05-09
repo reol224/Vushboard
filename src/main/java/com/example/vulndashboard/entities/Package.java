@@ -20,8 +20,9 @@ public class Package {
 
     @Id
     private ObjectId _id;
-    private long pkId;
+    private long identifyingNumber;
     private String name;
+    private String vendor;
     private String version;
     private String arch;
 
@@ -31,12 +32,12 @@ public class Package {
 
     }
 
-    public long getPkId() {
-        return pkId;
+    public long getIdentifyingNumber() {
+        return identifyingNumber;
     }
 
-    public void setPkId(long pkId) {
-        this.pkId = pkId;
+    public void setIdentifyingNumber(long identifyingNumber) {
+        this.identifyingNumber = identifyingNumber;
     }
 
     public String getName() {
@@ -69,5 +70,13 @@ public class Package {
 
     public void setVms(Set<VirtualMachine> vms) {
         this.vms = vms;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 }

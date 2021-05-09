@@ -1,6 +1,7 @@
 package com.example.vulndashboard.controller;
 
 import com.example.vulndashboard.entities.CVRF;
+import com.example.vulndashboard.exceptions.ResourceNotFoundException;
 import com.example.vulndashboard.repository.CVRFRepository;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -52,7 +53,10 @@ public class CVRFController{
         return response.toPrettyString();
     }
 
-    @PostMapping("/all/add")
+    @GetMapping("/all")
+    public List<CVRF> getAllCVRF(){return repository.findAll();}
+
+    @PostMapping("/add")
     public String addCVRF(@RequestBody CVRF cvrf){
         mongoTemplate.insert(cvrf, "Vulnerabilities");
         return "Added CVRF " + cvrf.getRHSA() + " " + cvrf.getSeverity() + " "
@@ -60,25 +64,24 @@ public class CVRFController{
                 + " " + cvrf.getCVEs() + " " + cvrf.getReleasedPackages();
     }
 
-    @GetMapping("/all/{severity}")
+    @GetMapping("/{severity}")
     public Object getCVRFBySeverity(@PathVariable String severity){
-        return repository.findBySeverity(severity);
+        Optional<CVRF> optional = repository.findBySeverity(severity);
+        if(optional.isPresent()){
+            return repository.findBySeverity(severity);
+        }else{
+            return new ResourceNotFoundException("Couldn't find anything with " + severity + " severity!");
+        }
     }
 
-    @PutMapping("/all/{severity}")
-    public ResponseEntity<CVRF> updateCVRF(@PathVariable String severity, @RequestBody CVRF cvrf){
-        Optional<CVRF> optional = repository.findBySeverity(severity);
+    @PutMapping("/{severity}")
+    public ResponseEntity<CVRF> updateCVRFBySeverity(@PathVariable("severity") String severity, @RequestBody CVRF cvrf){
+        Optional<CVRF> optional = Optional.ofNullable(repository.findBySeverity(severity)
+                .orElseThrow(() -> new ResourceNotFoundException("Couldn't find anything with " + severity + " severity!")));
 
         if(optional.isPresent()){
             CVRF newData = optional.get();
-            newData.setRHSA(cvrf.getRHSA());
             newData.setSeverity(cvrf.getSeverity());
-            newData.setReleasedOn(cvrf.getReleasedOn());
-            newData.setCVEs(cvrf.getCVEs());
-            newData.setBugzillas(cvrf.getBugzillas());
-            newData.setReleasedPackages(cvrf.getReleasedPackages());
-            newData.setResourceUrl(cvrf.getResourceUrl());
-
             return new ResponseEntity<>(repository.save(newData), HttpStatus.OK);
         }
         else{
@@ -86,7 +89,7 @@ public class CVRFController{
         }
     }
 
-    @DeleteMapping("/all/{severity}")
+    @DeleteMapping("/{severity}")
     public ResponseEntity<HttpStatus> deleteBySeverity(@PathVariable("severity") String severity) {
         try {
             repository.deleteBySeverity(severity);
@@ -106,7 +109,6 @@ public class CVRFController{
         }
     }
 
-    @GetMapping("/all")
-    public List<CVRF> getAllCVRF(){return repository.findAll();}
+
 
 }

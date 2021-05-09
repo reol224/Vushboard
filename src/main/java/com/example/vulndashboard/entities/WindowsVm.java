@@ -15,8 +15,8 @@ public class WindowsVm extends VirtualMachine{
     public WindowsVm(String hostName,
                      String OSName,
                      String OSVersion,
-                     String SystemManufacturer,
+                     String processorType,
                      String ipAddress) {
-        super(hostName, OSName, OSVersion,SystemManufacturer,ipAddress);
+        super(hostName, OSName, OSVersion,processorType,ipAddress);
     }
 }

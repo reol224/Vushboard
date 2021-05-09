@@ -19,10 +19,7 @@ import java.util.Set;
         "host_name",
         "os_name",
         "os_version",
-        "os_manufacturer",
-        "os_config",
-        "system_manufacturer",
-        "system_type",
+        "processor_type",
         "ip_address"
 })
 @Document(collection = "Virtual Machine")
@@ -39,7 +36,7 @@ public abstract class VirtualMachine {
     @JsonProperty("processor_type")
     private String processorType;
     @JsonProperty("ip_address")
-    private String  ipAddress;
+    private String ipAddress;
     private Set<Package> packages;
 
     public VirtualMachine(String hostName, String OSName, String OSVersion, String processorType, String ipAddress) {
