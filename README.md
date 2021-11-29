@@ -4,7 +4,7 @@
 [![CircleCI](https://circleci.com/gh/reol224/Vushboard/tree/main.svg?style=shield)](https://circleci.com/gh/reol224/Vushboard/tree/main)
 
 # Vushboard
-
+<em>If build is failing, means that MongoDB is on pause.</em>
 
 Vushboard (VD) is an open source security auditing utility. 
 
